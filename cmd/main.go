@@ -9,13 +9,13 @@ import (
 	"github.com/scch94/ins_log"
 )
 
+//lint:ignore SA1029 "Using built-in type string as key for context value intentionally"
 var ctx = context.WithValue(context.Background(), "packageName", "main")
 
 func main() {
-
-	ins_log.Infof(ctx, "startig micropagos database module version : %+v", version())
 	ins_log.StartLogger()
 	ins_log.SetService("micropagosdatabase")
+	ins_log.Infof(ctx, "startig micropagos database module version : %+v", version())
 
 	//conectando a las 2 bases de datos
 	driverUserDatabase := database.MySQLUsers

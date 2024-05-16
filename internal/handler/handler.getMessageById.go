@@ -2,6 +2,7 @@ package handler
 
 import (
 	"database/sql"
+	"encoding/hex"
 	"errors"
 	"net/http"
 	"strconv"
@@ -55,7 +56,8 @@ func (handler *Handler) GetMessageById(c *gin.Context) {
 	default:
 		ins_log.Infof(ctx, "the message with id : %s is this: %s", idStr, modelMessage.Content)
 	}
-	message := "this is the message " + modelMessage.Content
+	bytes := []byte(modelMessage.Content)
+	message := "this is the message " + hex.EncodeToString(bytes)
 	response := responses.NewResponseMessage(0, message, id)
 	c.JSON(http.StatusOK, response)
 }

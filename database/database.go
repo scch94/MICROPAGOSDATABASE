@@ -121,26 +121,24 @@ func PoolUsers() *sql.DB {
 }
 
 func StringToNull(s string) sql.NullString {
-	null := sql.NullString{String: s}
-	if null.String != "" {
-		null.Valid = false
+	if s == "" {
+		return sql.NullString{String: "", Valid: false}
 	}
-	return null
+	return sql.NullString{String: s, Valid: true}
 }
 
 func TimeToNull(t time.Time) sql.NullTime {
-	null := sql.NullTime{Time: t}
-	if !null.Time.IsZero() {
-		null.Valid = true
+	if t.IsZero() {
+		return sql.NullTime{Time: t, Valid: false}
 	}
-	return null
+	return sql.NullTime{Time: t, Valid: true}
 }
+
 func Uint64ToNull(i uint64) sql.NullInt64 {
-	null := sql.NullInt64{Int64: int64(i)}
-	if i != 0 {
-		null.Valid = true
+	if i == 0 {
+		return sql.NullInt64{Int64: 0, Valid: false}
 	}
-	return null
+	return sql.NullInt64{Int64: int64(i), Valid: true}
 }
 
 type scanner interface {

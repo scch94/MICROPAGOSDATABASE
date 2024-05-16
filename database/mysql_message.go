@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"time"
 
 	"github.com/scch94/MICROPAGOSDATABASE.git/internal/models"
 	"github.com/scch94/ins_log"
@@ -29,6 +30,7 @@ func NewMysqlMessage(db *sql.DB) *MysqlMessage {
 	return &MysqlMessage{db}
 }
 func (p *MysqlMessage) InsertMessage(m *models.MessageModel) error {
+	startTime := time.Now() // Captura el tiempo de inicio de la operación
 	ins_log.Tracef(ctx, "se tratara de insertar el mensaje en la base de datos")
 	stmt, err := p.db.Prepare(mySQLInsertMessage)
 	ins_log.Tracef(ctx, "esta es la consulta que intentaremos insertar: %s", mySQLInsertMessage)
@@ -44,13 +46,13 @@ func (p *MysqlMessage) InsertMessage(m *models.MessageModel) error {
 		StringToNull(m.MobileCountryISOCode),
 		StringToNull(m.ShortNumber),
 		StringToNull(m.Telco),
-		TimeToNull(m.Created),
+		StringToNull(m.Created),
 		StringToNull(m.RoutingType),
 		StringToNull(m.MatchedPattern),
 		StringToNull(m.ServiceID),
 		StringToNull(m.TelcoID),
 		StringToNull(m.SessionAction),
-		StringToNull(m.SessionParametersMap),
+		(m.SessionParametersMap),
 		Uint64ToNull(m.SessionTimeoutSeconds),
 		Uint64ToNull(m.Priority),
 		StringToNull(m.ClientID),
@@ -60,12 +62,12 @@ func (p *MysqlMessage) InsertMessage(m *models.MessageModel) error {
 		Uint64ToNull(m.DefaultActionID),
 		Uint64ToNull(m.ApplicationID),
 		Uint64ToNull(m.SessionID),
-		TimeToNull(m.Processed),
+		StringToNull(m.Processed),
 		Uint64ToNull(m.MillisSinceRequest),
 		StringToNull(m.SessionApplicationName),
-		TimeToNull(m.Sendafter),
-		TimeToNull(m.Sendbefore),
-		TimeToNull(m.Sent),
+		StringToNull(m.Sendafter),
+		StringToNull(m.Sendbefore),
+		StringToNull(m.Sent),
 		StringToNull(m.Status),
 		StringToNull(m.AccessTimeoutHandlerQueuename),
 		Uint64ToNull(m.UseUnsupportedMobilesRegistry),
@@ -74,6 +76,10 @@ func (p *MysqlMessage) InsertMessage(m *models.MessageModel) error {
 	if err != nil {
 		return err
 	}
+
+	duration := time.Since(startTime) // Calcula la duración de la operación
+	ins_log.Infof(ctx, "La inserción del mensaje en la base de datos tardó: %v", duration)
+
 	id, err := result.LastInsertId()
 	if err != nil {
 		return err

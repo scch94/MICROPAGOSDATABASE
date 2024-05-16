@@ -30,7 +30,7 @@ func (handler *Handler) InseretMessage(c *gin.Context) {
 	} else {
 		ins_log.SetUtfi(request.Utfi)
 	}
-	ins_log.Tracef(ctx, "this is the data that we recibed in the petition to insert the message %s", request.ToString())
+	ins_log.Tracef(ctx, "this is the data that we recibed in the petition to insert the message %s", request)
 	ins_log.Info(ctx, "starting to insert message")
 	// Obtener la conexión de la pool para insertar
 	storageMessage := database.NewMysqlMessage(database.PoolMessage())
