@@ -25,7 +25,8 @@ func SetupRouter(h *handler.Handler) *gin.Engine {
 	// Middleware de recuperación para manejar errores de pá
 	router.Use(gin.Recovery())
 	router.GET("/", h.Welcome)
-	router.POST("/insertMessage", h.InseretMessage)
+	router.POST("/insertMessage", h.InsertMessage)
+	router.GET("filter/:mobile/:shortNumber/:utfi", h.IsFilter)
 	router.GET("/message/:id/:utfi", h.GetMessageById)
 	router.NoRoute(notFoundHandler)
 

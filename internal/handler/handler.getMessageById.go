@@ -10,11 +10,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/scch94/MICROPAGOSDATABASE.git/database"
 	"github.com/scch94/MICROPAGOSDATABASE.git/internal/models"
-	"github.com/scch94/MICROPAGOSDATABASE.git/internal/responses"
+	"github.com/scch94/MICROPAGOSDATABASE.git/internal/models/responses"
 	"github.com/scch94/ins_log"
 )
 
 func (handler *Handler) GetMessageById(c *gin.Context) {
+
 	//getting the id and the utfi in the params
 	idStr := c.Param("id")
 	//parcing the id to int 64

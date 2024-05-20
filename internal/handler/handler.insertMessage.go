@@ -7,11 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/scch94/MICROPAGOSDATABASE.git/database"
 	"github.com/scch94/MICROPAGOSDATABASE.git/internal/models"
-	"github.com/scch94/MICROPAGOSDATABASE.git/internal/responses"
+	"github.com/scch94/MICROPAGOSDATABASE.git/internal/models/responses"
 	"github.com/scch94/ins_log"
 )
 
-func (handler *Handler) InseretMessage(c *gin.Context) {
+func (handler *Handler) InsertMessage(c *gin.Context) {
 
 	var request models.MessageModel
 	// Utiliza el método BindJSON de Gin para vincular los datos del cuerpo de la solicitud a la estructura request

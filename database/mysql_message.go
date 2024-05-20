@@ -29,6 +29,7 @@ type MysqlMessage struct {
 func NewMysqlMessage(db *sql.DB) *MysqlMessage {
 	return &MysqlMessage{db}
 }
+
 func (p *MysqlMessage) InsertMessage(m *models.MessageModel) error {
 	startTime := time.Now() // Captura el tiempo de inicio de la operación
 	ins_log.Tracef(ctx, "se tratara de insertar el mensaje en la base de datos")
@@ -46,7 +47,7 @@ func (p *MysqlMessage) InsertMessage(m *models.MessageModel) error {
 		StringToNull(m.MobileCountryISOCode),
 		StringToNull(m.ShortNumber),
 		StringToNull(m.Telco),
-		StringToNull(m.Created),
+		TimeToNull(m.Created),
 		StringToNull(m.RoutingType),
 		StringToNull(m.MatchedPattern),
 		StringToNull(m.ServiceID),
@@ -62,12 +63,12 @@ func (p *MysqlMessage) InsertMessage(m *models.MessageModel) error {
 		Uint64ToNull(m.DefaultActionID),
 		Uint64ToNull(m.ApplicationID),
 		Uint64ToNull(m.SessionID),
-		StringToNull(m.Processed),
+		TimeToNull(m.Processed),
 		Uint64ToNull(m.MillisSinceRequest),
 		StringToNull(m.SessionApplicationName),
 		StringToNull(m.Sendafter),
 		StringToNull(m.Sendbefore),
-		StringToNull(m.Sent),
+		TimeToNull(m.Sent),
 		StringToNull(m.Status),
 		StringToNull(m.AccessTimeoutHandlerQueuename),
 		Uint64ToNull(m.UseUnsupportedMobilesRegistry),
