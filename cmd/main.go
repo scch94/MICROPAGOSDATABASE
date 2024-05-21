@@ -4,6 +4,7 @@ import (
 	"context"
 	"os"
 
+	"github.com/scch94/MICROPAGOSDATABASE.git/config"
 	"github.com/scch94/MICROPAGOSDATABASE.git/database"
 	"github.com/scch94/MICROPAGOSDATABASE.git/server"
 	"github.com/scch94/ins_log"
@@ -13,6 +14,14 @@ import (
 var ctx = context.WithValue(context.Background(), "packageName", "main")
 
 func main() {
+	//levantamos la config
+	errConfig := config.Upconfig()
+	if errConfig != nil {
+		ins_log.Errorf(ctx, "error when we try to get the configuration err: %v", errConfig)
+		return
+	}
+
+	//inicialisamos el logger
 	ins_log.StartLogger()
 	ins_log.SetService("micropagosdatabase")
 	ins_log.Infof(ctx, "startig micropagos database module version : %+v", version())

@@ -1,3 +1,32 @@
 {
-    "nombre":"santiago"
+    "serverPort":":2121",
+
+    "mysqlConnection":{
+        "raven":{
+            "connectionString":"root:root@tcp(127.0.0.1:1010)/raven",
+            "maxOpenConns":50,
+            "maxIdleConns":20,
+            "conMaxLifeTime":30000
+        },
+        "weaver":{
+            "connectionString":"root:root@tcp(127.0.0.1:1010)/weaver",
+            "maxOpenConns":50,
+            "maxIdleConns":20,
+            "conMaxLifeTime":30000
+        }
+    },
+    "myPostgresConnection":{
+        "raven":{
+            "connectionString":"",
+            "maxOpenConns":0,
+            "maxIdleConns":0,
+            "conMaxLifeTime":0
+        },
+        "weaver":{
+            "connectionString":"",
+            "maxOpenConns":0,
+            "maxIdleConns":0,
+            "conMaxLifeTime":0
+        }
+    }
 }
