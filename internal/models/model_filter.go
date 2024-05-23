@@ -1,6 +1,7 @@
 package models
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/scch94/MICROPAGOSDATABASE.git/internal/models/request"
@@ -30,10 +31,10 @@ func (m FilterModel) ToString() string {
 
 // utilzamos esta interface que tendra los metos que luego tendremos que utilizar en los distintos motores de base de datos
 type FilterStorage interface {
-	IsFilter(request.IsFiler) (*FilterModel, error)
+	IsFilter(request.IsFiler, context.Context) (*FilterModel, error)
 }
 
-// el servicio sera el encargado de tener toda la logica del modelo de message
+// el servicio sera el encargado de tener toda la logica del modelo de filter
 type FilterService struct {
 	filterStorage FilterStorage
 }
@@ -43,6 +44,6 @@ func NewFilterService(f FilterStorage) *FilterService {
 	return &FilterService{filterStorage: f}
 }
 
-func (s *FilterService) IsFilter(r request.IsFiler) (*FilterModel, error) {
-	return s.filterStorage.IsFilter(r)
+func (s *FilterService) IsFilter(r request.IsFiler, ctx context.Context) (*FilterModel, error) {
+	return s.filterStorage.IsFilter(r, ctx)
 }

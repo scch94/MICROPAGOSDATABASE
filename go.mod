@@ -6,8 +6,8 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/lib/pq v1.10.9
-	github.com/scch94/Gconfiguration v0.0.0-20240430154804-6649feb7ee98
-	github.com/scch94/ins_log v0.0.0-20240511034327-ce817514df2e
+	github.com/scch94/Gconfiguration v0.0.0-20240512172409-4528e7ec42f1
+	github.com/scch94/ins_log v0.0.0-20240523020353-9090a3e11ceb
 )
 
 require (

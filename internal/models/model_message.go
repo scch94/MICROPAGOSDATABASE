@@ -1,13 +1,13 @@
 package models
 
 import (
+	"context"
 	"fmt"
 	"time"
 )
 
 // modelo de la base de message ademas del json
 type MessageModel struct {
-	Utfi                          string    `json:"utfi"`
 	Id                            uint64    `json:"id"`
 	Type                          string    `json:"type"` // Nombre del campo en MySQL
 	Content                       string    `json:"content"`
@@ -86,8 +86,8 @@ func (m *MessageModel) Name() string {
 
 // utilzamos esta interface que tendra los metos que luego tendremos que utilizar en los distintos motores de base de datos
 type Storage interface {
-	InsertMessage(*MessageModel) error
-	GetByID(uint64) (*MessageModel, error)
+	InsertMessage(*MessageModel, context.Context) error
+	GetByID(uint64, context.Context) (*MessageModel, error)
 }
 
 // el servicio sera el encargado de tener toda la logica del modelo de message
@@ -102,11 +102,11 @@ func NewService(s Storage) *Service {
 
 // aqui deberas crear los metodos para que el main o desde donde quieras llamarlo pueda llamar al metodo que quieras utilizar
 // insert permite insertar en la base un mensaje
-func (s *Service) InsertMessage(m *MessageModel) error {
-	return s.storage.InsertMessage(m)
+func (s *Service) InsertMessage(m *MessageModel, ctx context.Context) error {
+	return s.storage.InsertMessage(m, ctx)
 }
 
 // para traer un unico valor de la tabla message
-func (s *Service) GetByID(id uint64) (*MessageModel, error) {
-	return s.storage.GetByID(id)
+func (s *Service) GetByID(id uint64, ctx context.Context) (*MessageModel, error) {
+	return s.storage.GetByID(id, ctx)
 }

@@ -13,6 +13,8 @@ import (
 
 func (handler *Handler) InsertMessage(c *gin.Context) {
 
+	ctx := c.Request.Context()
+	ctx = ins_log.SetPackageNameInContext(ctx, "handler")
 	var request models.MessageModel
 	// Utiliza el método BindJSON de Gin para vincular los datos del cuerpo de la solicitud a la estructura request
 	if err := c.BindJSON(&request); err != nil {
@@ -25,18 +27,13 @@ func (handler *Handler) InsertMessage(c *gin.Context) {
 		}
 
 	}
-	if request.Utfi == "" {
-		ins_log.GenerateUtfi()
-	} else {
-		ins_log.SetUtfi(request.Utfi)
-	}
 	ins_log.Tracef(ctx, "this is the data that we recibed in the petition to insert the message %s", request)
 	ins_log.Info(ctx, "starting to insert message")
 	// Obtener la conexión de la pool para insertar
 	storageMessage := database.NewMysqlMessage(database.PoolMessage())
 	serviceMessage := models.NewService(storageMessage)
 
-	err := serviceMessage.InsertMessage(&request)
+	err := serviceMessage.InsertMessage(&request, ctx)
 	if err != nil {
 		ins_log.Error(ctx, "error inserting message insertMessage(request) :")
 		response := responses.NewResponseMessage(1, err.Error(), 0)

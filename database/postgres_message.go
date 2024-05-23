@@ -1,6 +1,7 @@
 package database
 
 import (
+	"context"
 	"database/sql"
 
 	"github.com/scch94/MICROPAGOSDATABASE.git/internal/models"
@@ -30,14 +31,9 @@ type PostgresMessage struct {
 func NewPostgresMessage(db *sql.DB) *PostgresMessage {
 	return &PostgresMessage{db}
 }
-func (p *PostgresMessage) InsertMessage(m *models.MessageModel) error {
+func (p *PostgresMessage) InsertMessage(m *models.MessageModel, ctx context.Context) error {
 	ins_log.Tracef(ctx, "se tratara de insertar el mensaje en la base de datos")
-	stmt, err := p.db.Prepare(psqlInsertMessage)
-	if err != nil {
-		return err
-	}
-	defer stmt.Close()
-	err = stmt.QueryRow(
+	err := p.db.QueryRow(psqlInsertMessage,
 		m.Type, m.Content, m.MobileNumber, m.MobileCountryISOCode, m.ShortNumber, m.Telco, m.Created, m.RoutingType,
 		m.MatchedPattern, m.ServiceID, m.TelcoID, m.SessionAction, m.SessionParametersMap, m.SessionTimeoutSeconds,
 		m.Priority, m.ClientID, m.URL, m.AccessTimeoutSeconds, m.RequestID, m.DefaultActionID, m.ApplicationID, m.SessionID,

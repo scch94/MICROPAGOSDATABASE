@@ -4,19 +4,21 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/scch94/MICROPAGOSDATABASE.git/internal/handler"
+	"github.com/scch94/MICROPAGOSDATABASE.git/config"
 	"github.com/scch94/MICROPAGOSDATABASE.git/internal/routes"
 	"github.com/scch94/ins_log"
 )
 
-const port = ":2121"
+func StartServer(ctx context.Context) error {
 
-func StartServer() error {
-	ctx := context.WithValue(context.Background(), "packageName", "server")
-	h := &handler.Handler{}
-	router := routes.SetupRouter(h)
+	// Agregamos el valor "packageName" al contexto
+	ctx = ins_log.SetPackageNameInContext(ctx, "server")
+
+	ins_log.Infof(ctx, "Starting server on address: %s", config.Config.ServerPort)
+
+	router := routes.SetupRouter(ctx)
 	serverConfig := &http.Server{
-		Addr:    port,
+		Addr:    config.Config.ServerPort,
 		Handler: router,
 	}
 	err := serverConfig.ListenAndServe()

@@ -10,33 +10,33 @@ import (
 	"github.com/scch94/ins_log"
 )
 
-//lint:ignore SA1029 "Using built-in type string as key for context value intentionally"
+func SetupRouter(ctx context.Context) *gin.Engine {
 
-var ctx = context.WithValue(context.Background(), "packageName", "routes")
-
-func SetupRouter(h *handler.Handler) *gin.Engine {
-
-	gin.SetMode(gin.ReleaseMode)
 	// create a new gin router and register the handlers
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.New()
+
 	// Agregar middleware global
-	router.Use(middleware.GlobalMiddleware())
-	//globalMiddleware())
-	// Middleware de recuperación para manejar errores de pá
 	router.Use(gin.Recovery())
+	router.Use(middleware.GlobalMiddleware())
+
+	h := handler.Handler{}
+
+	//rutas
 	router.GET("/", h.Welcome)
-	router.POST("/insertMessage", h.InsertMessage)
-	router.GET("filter/:mobile/:shortNumber/:utfi", h.IsFilter)
+	router.POST("/insertMessage/:utfi", h.InsertMessage)
+	router.GET("/filter/:mobile/:shortNumber/:utfi", h.IsFilter)
 	router.GET("/message/:id/:utfi", h.GetMessageById)
+	router.GET("/userdomain/:username/:utfi", h.GetUserDomain)
 	router.NoRoute(notFoundHandler)
 
 	return router
 }
 
-// isarasola / 4Gpeperoni5f2l&6519^P$$a
 // Controlador para manejar rutas no encontradas
 func notFoundHandler(c *gin.Context) {
-
+	ctx := c.Request.Context()
+	ctx = ins_log.SetPackageNameInContext(ctx, "handler")
 	ins_log.Errorf(ctx, "Route  not found: url: %v, method: %v", c.Request.RequestURI, c.Request.Method)
 	c.JSON(http.StatusNotFound, nil)
 }

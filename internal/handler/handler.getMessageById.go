@@ -16,6 +16,9 @@ import (
 
 func (handler *Handler) GetMessageById(c *gin.Context) {
 
+	ctx := c.Request.Context()
+	ctx = ins_log.SetPackageNameInContext(ctx, "handler")
+
 	//getting the id and the utfi in the params
 	idStr := c.Param("id")
 	//parcing the id to int 64
@@ -28,12 +31,6 @@ func (handler *Handler) GetMessageById(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, response)
 		return
 	}
-	utfi := c.Param("utfi")
-	if utfi == "" {
-		ins_log.GenerateUtfi()
-	} else {
-		ins_log.SetUtfi(utfi)
-	}
 	ins_log.Infof(ctx, "starting to get the message with id %s", idStr)
 	//getting the pool conection to insert
 	ins_log.Tracef(ctx, "startin to get the pool conection to get the message")
@@ -41,7 +38,7 @@ func (handler *Handler) GetMessageById(c *gin.Context) {
 	serviceMessage := models.NewService(storageMessage)
 	//creamos una variable con el modelo del message
 
-	modelMessage, err := serviceMessage.GetByID(id)
+	modelMessage, err := serviceMessage.GetByID(id, ctx)
 	switch {
 	case errors.Is(err, sql.ErrNoRows):
 		ins_log.Infof(ctx, "product with id: %s not found", idStr)

@@ -1,5 +1,6 @@
 {
     "serverPort":":2121",
+    "log_level":"info",
 
     "mysqlConnection":{
         "raven":{

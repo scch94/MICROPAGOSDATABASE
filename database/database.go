@@ -8,6 +8,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
+	"github.com/scch94/MICROPAGOSDATABASE.git/config"
 	"github.com/scch94/MICROPAGOSDATABASE.git/internal/models"
 	"github.com/scch94/ins_log"
 )
@@ -24,8 +25,8 @@ var (
 
 type Driver string
 
-//lint:ignore SA1029 "Using built-in type string as key for context value intentionally"
-var ctx = context.WithValue(context.Background(), "packageName", "database")
+// //lint:ignore SA1029 "Using built-in type string as key for context value intentionally"
+// var ctx = context.WithValue(context.Background(), "packageName", "database")
 
 // drivers
 const (
@@ -34,80 +35,89 @@ const (
 	MySQLUsers Driver = "MYSQL_USERS"
 )
 
-const (
-	postgresConnectionString             = "user=xxepin dbname=testing password=migracion host=digicel-dev-flex.postgres.database.azure.com port=5432 sslmode=require"
-	mysqlConnectionSrting                = "root:root@tcp(127.0.0.1:1010)/raven"
-	mysqlConnectionSrtingtousersdatabase = "root:root@tcp(127.0.0.1:1010)/weaver"
-)
-
 // con new creamos la coneccion a la base
-func New(d Driver) {
+func New(d Driver, ctx context.Context) {
+	//traemos el contexto y le setiamos el contexto actual
+	ctx = ins_log.SetPackageNameInContext(ctx, "database")
 	switch d {
-	case Postgres:
-		newPostgresDb()
+	// case Postgres:
+	// 	newPostgresDb()
 	case MySQL:
-		newMySQLDB()
+		newMySQLDB(ctx)
 	case MySQLUsers:
-		newMySQLDbUser()
+		newMySQLDbUser(ctx)
 	default:
 
 		ins_log.Info(ctx, "not implemented")
 	}
 }
 
-func newPostgresDb() {
-	dbMessageOnce.Do(func() {
+// func newPostgresDb() {
+// 	dbMessageOnce.Do(func() {
 
-		var err error
-		dbMessage, err = sql.Open("postgres", postgresConnectionString)
-		if err != nil {
-			ins_log.Fatalf(ctx, "cant open postgres database with string connection :%s , with error :%s", postgresConnectionString, err)
-			return
-		}
-		if err = dbMessage.Ping(); err != nil {
-			ins_log.Fatalf(ctx, "cant do ping to the database error :%s", err)
-			return
-		}
-		ins_log.Info(ctx, "conected to the postgres message database")
-	})
-}
-func newPostgresDbUser() {
-	dbUsersOnce.Do(func() {
-		var err error
-		dbUsers, err = sql.Open("mysql", mysqlConnectionSrtingtousersdatabase)
-		if err != nil {
-			ins_log.Fatalf(ctx, "cant open myssql database with string connection :%s , with error :%s", postgresConnectionString, err)
-		}
-		if err = dbUsers.Ping(); err != nil {
-			ins_log.Fatalf(ctx, "cant do ping to the database error :%s", err)
-		}
-		ins_log.Info(ctx, "conected to postgres user database")
-	})
-}
-func newMySQLDB() {
+//			var err error
+//			dbMessage, err = sql.Open("postgres", postgresConnectionString.ConnectionString)
+//			if err != nil {
+//				ins_log.Fatalf(ctx, "cant open postgres database with string connection :%s , with error :%s", postgresConnectionString, err)
+//				return
+//			}
+//			if err = dbMessage.Ping(); err != nil {
+//				ins_log.Fatalf(ctx, "cant do ping to the database error :%s", err)
+//				return
+//			}
+//			ins_log.Info(ctx, "conected to the postgres message database")
+//		})
+//	}
+//
+//	func newPostgresDbUser() {
+//		dbUsersOnce.Do(func() {
+//			var err error
+//			dbUsers, err = sql.Open("mysql", mysqlConnectionSrtingtousersdatabase.ConnectionString)
+//			if err != nil {
+//				ins_log.Fatalf(ctx, "cant open myssql database with string connection :%s , with error :%s", postgresConnectionString, err)
+//			}
+//			if err = dbUsers.Ping(); err != nil {
+//				ins_log.Fatalf(ctx, "cant do ping to the database error :%s", err)
+//			}
+//			ins_log.Info(ctx, "conected to postgres user database")
+//		})
+//	}
+func newMySQLDB(ctx context.Context) {
 	dbMessageOnce.Do(func() {
+		ctx = ins_log.SetPackageNameInContext(ctx, "database")
 		var err error
-		dbMessage, err = sql.Open("mysql", mysqlConnectionSrting)
+		dbMessage, err = sql.Open("mysql", config.Config.MySQLConnection.Raven.ConnectionString)
 		if err != nil {
-			ins_log.Fatalf(ctx, "cant open myssql database with string connection :%s , with error :%s", mysqlConnectionSrting, err)
+			ins_log.Fatalf(ctx, "cant open myssql database with string connection :%s , with error :%s", config.Config.MySQLConnection.Raven.ConnectionString, err)
 		}
 		if err = dbMessage.Ping(); err != nil {
 			ins_log.Fatalf(ctx, "cant do ping to the database error :%s", err)
 		}
 		ins_log.Info(ctx, "conected to the mysql message database")
+
+		dbUsers.SetMaxOpenConns(config.Config.MySQLConnection.Raven.MaxOpenConns)
+		dbUsers.SetMaxIdleConns(config.Config.MySQLConnection.Raven.MaxIdleConns)
+		dbUsers.SetConnMaxLifetime(time.Duration(config.Config.MySQLConnection.Raven.ConnMaxLifeTime) * time.Millisecond)
 	})
 }
-func newMySQLDbUser() {
+func newMySQLDbUser(ctx context.Context) {
 	dbUsersOnce.Do(func() {
+		ctx = ins_log.SetPackageNameInContext(ctx, "database")
 
 		var err error
-		dbUsers, err = sql.Open("mysql", mysqlConnectionSrtingtousersdatabase)
+		dbUsers, err = sql.Open("mysql", config.Config.MySQLConnection.Weaver.ConnectionString)
 		if err != nil {
-			ins_log.Fatalf(ctx, "cant open myssql database with string connection :%s , with error :%s", mysqlConnectionSrtingtousersdatabase, err)
+			ins_log.Fatalf(ctx, "cant open myssql database with string connection :%s , with error :%s", config.Config.MySQLConnection.Weaver.ConnectionString, err)
 		}
 		if err = dbUsers.Ping(); err != nil {
 			ins_log.Fatalf(ctx, "cant do ping to the database error :%s", err)
 		}
+
+		///setiamos los valores de config
+		dbUsers.SetMaxOpenConns(config.Config.MySQLConnection.Weaver.MaxOpenConns)
+		dbUsers.SetMaxIdleConns(config.Config.MySQLConnection.Weaver.MaxIdleConns)
+		dbUsers.SetConnMaxLifetime(time.Duration(config.Config.MySQLConnection.Weaver.ConnMaxLifeTime) * time.Millisecond)
+
 		ins_log.Info(ctx, "conected to the mysql users database")
 	})
 }
@@ -145,7 +155,10 @@ type scanner interface {
 	Scan(dest ...interface{}) error
 }
 
-func ScanRowMessage(s scanner) (*models.MessageModel, error) {
+func ScanRowMessage(s scanner, ctx context.Context) (*models.MessageModel, error) {
+
+	ctx = ins_log.SetPackageNameInContext(ctx, "database")
+
 	ins_log.Debug(ctx, "starting to scan message models")
 	m := &models.MessageModel{}
 	contentNull := sql.NullString{}

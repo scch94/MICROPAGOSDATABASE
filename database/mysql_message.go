@@ -1,6 +1,7 @@
 package database
 
 import (
+	"context"
 	"database/sql"
 	"time"
 
@@ -30,17 +31,16 @@ func NewMysqlMessage(db *sql.DB) *MysqlMessage {
 	return &MysqlMessage{db}
 }
 
-func (p *MysqlMessage) InsertMessage(m *models.MessageModel) error {
-	startTime := time.Now() // Captura el tiempo de inicio de la operación
-	ins_log.Tracef(ctx, "se tratara de insertar el mensaje en la base de datos")
-	stmt, err := p.db.Prepare(mySQLInsertMessage)
-	ins_log.Tracef(ctx, "esta es la consulta que intentaremos insertar: %s", mySQLInsertMessage)
+func (p *MysqlMessage) InsertMessage(m *models.MessageModel, ctx context.Context) error {
 
-	if err != nil {
-		return err
-	}
-	defer stmt.Close()
-	result, err := stmt.Exec(
+	//traemos el contexto y le setiamos el contexto actual
+	ctx = ins_log.SetPackageNameInContext(ctx, "database")
+
+	startTime := time.Now() // Captura el tiempo de inicio de la operación
+	ins_log.Tracef(ctx, "attempting to insert the message into the database")
+	ins_log.Tracef(ctx, "this is the query we will attempt to insert: %s", mySQLInsertMessage)
+
+	result, err := p.db.Exec(mySQLInsertMessage,
 		(m.Type),
 		(m.Content),
 		StringToNull(m.MobileNumber),
@@ -79,23 +79,17 @@ func (p *MysqlMessage) InsertMessage(m *models.MessageModel) error {
 	}
 
 	duration := time.Since(startTime) // Calcula la duración de la operación
-	ins_log.Infof(ctx, "La inserción del mensaje en la base de datos tardó: %v", duration)
+	ins_log.Infof(ctx, "Inserting the message into the database took: %v", duration)
 
 	id, err := result.LastInsertId()
 	if err != nil {
 		return err
 	}
 	m.Id = uint64(id)
-	ins_log.Infof(ctx, "se inserto el mensaje de manera correcta el mensaje se guardo con el id %d ", m.Id)
+	ins_log.Infof(ctx, "Message inserted successfully. The message was saved with the id %d ", m.Id)
 	return nil
 }
 
-func (p *MysqlMessage) GetByID(id uint64) (*models.MessageModel, error) {
-	stmt, err := p.db.Prepare(mySQLGetMessageById)
-	if err != nil {
-		return &models.MessageModel{}, err
-	}
-	defer stmt.Close()
-
-	return ScanRowMessage(stmt.QueryRow(id))
+func (p *MysqlMessage) GetByID(id uint64, ctx context.Context) (*models.MessageModel, error) {
+	return ScanRowMessage(p.db.QueryRow(mySQLGetMessageById, id), ctx)
 }

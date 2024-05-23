@@ -1,6 +1,7 @@
 package database
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"time"
@@ -28,7 +29,10 @@ const (
 		`(direction IS NULL OR direction = 'OUT')`
 )
 
-func (p *MysqlFilter) IsFilter(r request.IsFiler) (*models.FilterModel, error) {
+func (p *MysqlFilter) IsFilter(r request.IsFiler, ctx context.Context) (*models.FilterModel, error) {
+
+	//traemos el contexto y le setiamos el contexto actual
+	ctx = ins_log.SetPackageNameInContext(ctx, "database")
 
 	//creamos la variable que guardara la respuesta que enviaremos
 	var filterModel models.FilterModel
@@ -37,16 +41,10 @@ func (p *MysqlFilter) IsFilter(r request.IsFiler) (*models.FilterModel, error) {
 	startTime := time.Now()
 	ins_log.Tracef(ctx, "Checking if the combination of destination and origin mobile numbers is not filtered.")
 
-	//preparamos el stmt de la consulta
-	stmt, err := p.db.Prepare(mySQLIsFilter)
 	ins_log.Tracef(ctx, "this is the QUERY: %s and the params: mobile_number=%s, shortnumber=%s", mySQLIsFilter, r.Mobile, r.ShortNumber)
-	if err != nil {
-		return &filterModel, err
-	}
-	defer stmt.Close()
 
-	//realiamos la consulta!
-	err = stmt.QueryRow(r.Mobile, r.ShortNumber).Scan(
+	// Ejecutamos la consulta directamente
+	err := p.db.QueryRow(mySQLIsFilter, r.Mobile, r.ShortNumber).Scan(
 		&filterModel.Id,
 		&filterModel.Added,
 		&filterModel.Comment,

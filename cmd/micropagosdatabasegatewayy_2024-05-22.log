@@ -1,0 +1,104 @@
+[2024-05-22 22:10:20.280] [not_specified] [config] [info] [] starting to get the config struct 
+[2024-05-22 22:10:20.280] [Gconfiguration] [] [info] [] starting gconfiguration Versión:%!(EXTRA string=1.0.0)
+[2024-05-22 22:10:20.281] [Gconfiguration] [] [info] [] ubication of the configurationfile C:\golang\proyectos\micropagosdatabase\cmd\configuration\config.json
+[2024-05-22 22:10:20.284] [Gconfiguration] [] [info] [] ending to get the configuration
+[2024-05-22 22:10:20.284] [Gconfiguration] [] [trace] [] this is the data that we have in the configuration {"serverPort":":2121","mysqlConnection":{"raven":{"connectionString":"root:root@tcp(127.0.0.1:1010)/raven","maxOpenConns":50,"maxIdleConns":20,"conMaxLifeTime":30000},"weaver":{"connectionString":"root:root@tcp(127.0.0.1:1010)/weaver","maxOpenConns":50,"maxIdleConns":20,"conMaxLifeTime":30000}},"myPostgresConnection":{"raven":{"connectionString":"","maxOpenConns":0,"maxIdleConns":0,"conMaxLifeTime":0},"weaver":{"connectionString":"","maxOpenConns":0,"maxIdleConns":0,"conMaxLifeTime":0}}}
+[2024-05-22 22:10:20.285] [micropagosdatabase] [main] [info] [] startig micropagos database module version : 1.0.0
+[2024-05-22 22:10:30.994] [micropagosdatabase] [database] [info] [] conected to the mysql users database
+[2024-05-22 22:10:41.640] [micropagosdatabase] [database] [info] [] conected to the mysql message database
+[2024-05-22 22:10:41.640] [micropagosdatabase] [server] [info] [] Starting server on address: :2121
+[2024-05-22 22:10:56.293] [micropagosdatabase] [middleware] [info] [580eb5636663] New petition received
+[2024-05-22 22:10:56.293] [micropagosdatabase] [middleware] [trace] [580eb5636663] url: /userdomain/eaguerre/580eb5636663, method: GET
+[2024-05-22 22:10:56.293] [micropagosdatabase] [handler] [info] [580eb5636663] starting to get the domain for the user eaguerre
+[2024-05-22 22:10:56.293] [micropagosdatabase] [handler] [trace] [580eb5636663] startin to get the pool conection to get the message
+[2024-05-22 22:10:56.293] [micropagosdatabase] [middleware] [info] [19882f82a926] New petition received
+[2024-05-22 22:10:56.294] [micropagosdatabase] [middleware] [trace] [19882f82a926] url: /userdomain/eaguerre/19882f82a926, method: GET
+[2024-05-22 22:10:56.294] [micropagosdatabase] [database] [trace] [580eb5636663] starting to get the domain for the user :eaguerre
+[2024-05-22 22:10:56.294] [micropagosdatabase] [handler] [info] [19882f82a926] starting to get the domain for the user eaguerre
+[2024-05-22 22:10:56.294] [micropagosdatabase] [database] [trace] [580eb5636663] this is the QUERY: SELECT d.name FROM user u JOIN domain d ON u.domain_id = d.id where u.username=? and the params: Username=eaguerre,
+[2024-05-22 22:10:56.294] [micropagosdatabase] [handler] [trace] [19882f82a926] startin to get the pool conection to get the message
+[2024-05-22 22:10:56.294] [micropagosdatabase] [database] [trace] [19882f82a926] starting to get the domain for the user :eaguerre
+[2024-05-22 22:10:56.294] [micropagosdatabase] [database] [trace] [19882f82a926] this is the QUERY: SELECT d.name FROM user u JOIN domain d ON u.domain_id = d.id where u.username=? and the params: Username=eaguerre,
+[2024-05-22 22:10:56.801] [micropagosdatabase] [database] [info] [580eb5636663] the query in the database tooks: 507.4986ms
+[2024-05-22 22:10:56.802] [micropagosdatabase] [database] [info] [580eb5636663] and this is the domain: Micropagos
+[2024-05-22 22:10:56.802] [micropagosdatabase] [middleware] [info] [580eb5636663] Request took 508.5489ms
+[2024-05-22 22:10:57.445] [micropagosdatabase] [middleware] [info] [580eb5636663] New petition received
+[2024-05-22 22:10:57.445] [micropagosdatabase] [middleware] [trace] [580eb5636663] url: /filter/99111111/88277/580eb5636663, method: GET
+[2024-05-22 22:10:57.445] [micropagosdatabase] [handler] [info] [580eb5636663] starting to check if the shortnumber 88277 with the mobile 99111111 are filter
+[2024-05-22 22:10:57.445] [micropagosdatabase] [handler] [trace] [580eb5636663] startin to get the pool conection to get the message
+[2024-05-22 22:10:57.445] [micropagosdatabase] [database] [trace] [580eb5636663] Checking if the combination of destination and origin mobile numbers is not filtered.
+[2024-05-22 22:10:57.446] [micropagosdatabase] [database] [trace] [580eb5636663] this is the QUERY: SELECT id, added, comment, mobile_countryisocode, mobile_number, shortnumber FROM filter WHERE mobile_number = ? AND shortnumber = ? AND userremoved IS NULL AND (direction IS NULL OR direction = 'OUT') and the params: mobile_number=99111111, shortnumber=88277
+[2024-05-22 22:10:57.853] [micropagosdatabase] [database] [info] [580eb5636663] the combination of destination and origin mobile numbers is not filter
+[2024-05-22 22:10:57.853] [micropagosdatabase] [database] [info] [580eb5636663] the query in the database tooks: 407.2784ms
+[2024-05-22 22:10:57.853] [micropagosdatabase] [database] [trace] [580eb5636663] and this is the information of the database: {          false}
+[2024-05-22 22:10:57.853] [micropagosdatabase] [middleware] [info] [580eb5636663] Request took 408.3133ms
+[2024-05-22 22:10:57.862] [micropagosdatabase] [middleware] [info] [580eb5636663] New petition received
+[2024-05-22 22:10:57.862] [micropagosdatabase] [middleware] [trace] [580eb5636663] url: /insertMessage/580eb5636663, method: POST
+[2024-05-22 22:10:57.862] [micropagosdatabase] [handler] [trace] [580eb5636663] this is the data that we recibed in the petition to insert the message {%!s(uint64=0) OutboundSMS feli 99111111 UY 88277 ANCEL 2024-05-22 22:10:56.2455713 -0500 -05     NONE  %!s(uint64=0) %!s(uint64=0)   %!s(uint64=0) %!s(uint64=0) %!s(uint64=0) %!s(uint64=0) %!s(uint64=0) 2024-05-22 22:10:57.8609674 -0500 -05 %!s(uint64=0) micropagos 2.0   2024-05-22 22:10:57.8604456 -0500 -05 SENT  %!s(uint64=0) }
+[2024-05-22 22:10:57.862] [micropagosdatabase] [handler] [info] [580eb5636663] starting to insert message
+[2024-05-22 22:10:57.862] [micropagosdatabase] [database] [trace] [580eb5636663] attempting to insert the message into the database
+[2024-05-22 22:10:57.862] [micropagosdatabase] [database] [trace] [580eb5636663] this is the query we will attempt to insert: INSERT INTO message (type, content, mobile_number, mobile_countryisocode, shortnumber, telco, created, routingtype, matchedpattern, serviceid, telcoid, sessionaction, sessionparameters_map, sessiontimeoutseconds, priority, clientid, url, accesstimeoutseconds, request_id, defaultaction_id, application_id, session_id, processed, millissincerequest, sessionapplicationname, sendafter, sendbefore, sent, status, accesstimeouthandlerqueuename, useunsupportedmobilesregistry, originname) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[2024-05-22 22:10:58.277] [micropagosdatabase] [database] [info] [580eb5636663] Inserting the message into the database took: 414.6405ms
+[2024-05-22 22:10:58.277] [micropagosdatabase] [database] [info] [580eb5636663] Message inserted successfully. The message was saved with the id 19719204 
+[2024-05-22 22:10:58.277] [micropagosdatabase] [middleware] [info] [580eb5636663] Request took 415.1631ms
+[2024-05-22 22:11:07.134] [micropagosdatabase] [database] [info] [19882f82a926] the query in the database tooks: 10.840044s
+[2024-05-22 22:11:07.134] [micropagosdatabase] [database] [info] [19882f82a926] and this is the domain: Micropagos
+[2024-05-22 22:11:07.135] [micropagosdatabase] [middleware] [info] [19882f82a926] Request took 10.8420982s
+[2024-05-22 22:11:07.572] [micropagosdatabase] [middleware] [info] [19882f82a926] New petition received
+[2024-05-22 22:11:07.573] [micropagosdatabase] [middleware] [trace] [19882f82a926] url: /filter/99111111/88277/19882f82a926, method: GET
+[2024-05-22 22:11:07.573] [micropagosdatabase] [handler] [info] [19882f82a926] starting to check if the shortnumber 88277 with the mobile 99111111 are filter
+[2024-05-22 22:11:07.573] [micropagosdatabase] [handler] [trace] [19882f82a926] startin to get the pool conection to get the message
+[2024-05-22 22:11:07.573] [micropagosdatabase] [database] [trace] [19882f82a926] Checking if the combination of destination and origin mobile numbers is not filtered.
+[2024-05-22 22:11:07.573] [micropagosdatabase] [database] [trace] [19882f82a926] this is the QUERY: SELECT id, added, comment, mobile_countryisocode, mobile_number, shortnumber FROM filter WHERE mobile_number = ? AND shortnumber = ? AND userremoved IS NULL AND (direction IS NULL OR direction = 'OUT') and the params: mobile_number=99111111, shortnumber=88277
+[2024-05-22 22:11:07.985] [micropagosdatabase] [database] [info] [19882f82a926] the combination of destination and origin mobile numbers is not filter
+[2024-05-22 22:11:07.985] [micropagosdatabase] [database] [info] [19882f82a926] the query in the database tooks: 411.7943ms
+[2024-05-22 22:11:07.985] [micropagosdatabase] [database] [trace] [19882f82a926] and this is the information of the database: {          false}
+[2024-05-22 22:11:07.985] [micropagosdatabase] [middleware] [info] [19882f82a926] Request took 413.3486ms
+[2024-05-22 22:11:07.989] [micropagosdatabase] [middleware] [info] [19882f82a926] New petition received
+[2024-05-22 22:11:07.990] [micropagosdatabase] [middleware] [trace] [19882f82a926] url: /insertMessage/19882f82a926, method: POST
+[2024-05-22 22:11:07.990] [micropagosdatabase] [handler] [trace] [19882f82a926] this is the data that we recibed in the petition to insert the message {%!s(uint64=0) OutboundSMS eqwe 99111111 UY 88277 ANCEL 2024-05-22 22:10:56.2455713 -0500 -05     NONE  %!s(uint64=0) %!s(uint64=0)   %!s(uint64=0) %!s(uint64=0) %!s(uint64=0) %!s(uint64=0) %!s(uint64=0) 2024-05-22 22:11:07.9890554 -0500 -05 %!s(uint64=0) micropagos 2.0   2024-05-22 22:11:07.9885417 -0500 -05 SENT  %!s(uint64=0) }
+[2024-05-22 22:11:07.990] [micropagosdatabase] [handler] [info] [19882f82a926] starting to insert message
+[2024-05-22 22:11:07.990] [micropagosdatabase] [database] [trace] [19882f82a926] attempting to insert the message into the database
+[2024-05-22 22:11:07.990] [micropagosdatabase] [database] [trace] [19882f82a926] this is the query we will attempt to insert: INSERT INTO message (type, content, mobile_number, mobile_countryisocode, shortnumber, telco, created, routingtype, matchedpattern, serviceid, telcoid, sessionaction, sessionparameters_map, sessiontimeoutseconds, priority, clientid, url, accesstimeoutseconds, request_id, defaultaction_id, application_id, session_id, processed, millissincerequest, sessionapplicationname, sendafter, sendbefore, sent, status, accesstimeouthandlerqueuename, useunsupportedmobilesregistry, originname) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[2024-05-22 22:11:08.403] [micropagosdatabase] [database] [info] [19882f82a926] Inserting the message into the database took: 413.0617ms
+[2024-05-22 22:11:08.403] [micropagosdatabase] [database] [info] [19882f82a926] Message inserted successfully. The message was saved with the id 19719205 
+[2024-05-22 22:11:08.403] [micropagosdatabase] [middleware] [info] [19882f82a926] Request took 414.0964ms
+[2024-05-22 22:27:19.764] [not_specified] [config] [info] [] starting to get the config struct 
+[2024-05-22 22:27:19.764] [Gconfiguration] [] [info] [] starting gconfiguration Versión:%!(EXTRA string=1.0.0)
+[2024-05-22 22:27:19.765] [Gconfiguration] [] [info] [] ubication of the configurationfile C:\golang\proyectos\micropagosdatabase\cmd\configuration\config.json
+[2024-05-22 22:27:19.766] [Gconfiguration] [] [info] [] ending to get the configuration
+[2024-05-22 22:27:19.766] [Gconfiguration] [] [trace] [] this is the data that we have in the configuration {"serverPort":":2121","log_level":"info","mysqlConnection":{"raven":{"connectionString":"root:root@tcp(127.0.0.1:1010)/raven","maxOpenConns":50,"maxIdleConns":20,"conMaxLifeTime":30000},"weaver":{"connectionString":"root:root@tcp(127.0.0.1:1010)/weaver","maxOpenConns":50,"maxIdleConns":20,"conMaxLifeTime":30000}},"myPostgresConnection":{"raven":{"connectionString":"","maxOpenConns":0,"maxIdleConns":0,"conMaxLifeTime":0},"weaver":{"connectionString":"","maxOpenConns":0,"maxIdleConns":0,"conMaxLifeTime":0}}}
+[2024-05-22 22:27:19.766] [micropagosdatabase] [main] [info] [] startig micropagos database module version : 1.0.0
+[2024-05-22 22:27:30.467] [micropagosdatabase] [database] [info] [] conected to the mysql users database
+[2024-05-22 22:27:41.115] [micropagosdatabase] [database] [info] [] conected to the mysql message database
+[2024-05-22 22:27:41.115] [micropagosdatabase] [server] [info] [] Starting server on address: :2121
+[2024-05-22 22:27:58.259] [micropagosdatabase] [middleware] [info] [55ada1fc11d4] New petition received
+[2024-05-22 22:27:58.259] [micropagosdatabase] [handler] [info] [55ada1fc11d4] starting to get the domain for the user eaguerre
+[2024-05-22 22:27:58.259] [micropagosdatabase] [middleware] [info] [0d309086194a] New petition received
+[2024-05-22 22:27:58.260] [micropagosdatabase] [handler] [info] [0d309086194a] starting to get the domain for the user eaguerre
+[2024-05-22 22:27:58.665] [micropagosdatabase] [database] [info] [55ada1fc11d4] the query in the database tooks: 405.4915ms
+[2024-05-22 22:27:58.665] [micropagosdatabase] [database] [info] [55ada1fc11d4] and this is the domain: Micropagos
+[2024-05-22 22:27:58.665] [micropagosdatabase] [middleware] [info] [55ada1fc11d4] Request took 406.0219ms
+[2024-05-22 22:27:59.095] [micropagosdatabase] [middleware] [info] [55ada1fc11d4] New petition received
+[2024-05-22 22:27:59.095] [micropagosdatabase] [handler] [info] [55ada1fc11d4] starting to check if the shortnumber 88277 with the mobile 99111111 are filter
+[2024-05-22 22:27:59.498] [micropagosdatabase] [database] [info] [55ada1fc11d4] the combination of destination and origin mobile numbers is not filter
+[2024-05-22 22:27:59.498] [micropagosdatabase] [database] [info] [55ada1fc11d4] the query in the database tooks: 402.8258ms
+[2024-05-22 22:27:59.498] [micropagosdatabase] [middleware] [info] [55ada1fc11d4] Request took 403.3453ms
+[2024-05-22 22:27:59.500] [micropagosdatabase] [middleware] [info] [55ada1fc11d4] New petition received
+[2024-05-22 22:27:59.500] [micropagosdatabase] [handler] [info] [55ada1fc11d4] starting to insert message
+[2024-05-22 22:27:59.907] [micropagosdatabase] [database] [info] [55ada1fc11d4] Inserting the message into the database took: 407.1124ms
+[2024-05-22 22:27:59.907] [micropagosdatabase] [database] [info] [55ada1fc11d4] Message inserted successfully. The message was saved with the id 19719206 
+[2024-05-22 22:27:59.907] [micropagosdatabase] [middleware] [info] [55ada1fc11d4] Request took 407.1124ms
+[2024-05-22 22:28:09.091] [micropagosdatabase] [database] [info] [0d309086194a] the query in the database tooks: 10.8311194s
+[2024-05-22 22:28:09.091] [micropagosdatabase] [database] [info] [0d309086194a] and this is the domain: Micropagos
+[2024-05-22 22:28:09.091] [micropagosdatabase] [middleware] [info] [0d309086194a] Request took 10.8316498s
+[2024-05-22 22:28:09.527] [micropagosdatabase] [middleware] [info] [0d309086194a] New petition received
+[2024-05-22 22:28:09.527] [micropagosdatabase] [handler] [info] [0d309086194a] starting to check if the shortnumber 88277 with the mobile 99111111 are filter
+[2024-05-22 22:28:09.946] [micropagosdatabase] [database] [info] [0d309086194a] the combination of destination and origin mobile numbers is not filter
+[2024-05-22 22:28:09.946] [micropagosdatabase] [database] [info] [0d309086194a] the query in the database tooks: 418.5958ms
+[2024-05-22 22:28:09.947] [micropagosdatabase] [middleware] [info] [0d309086194a] Request took 420.635ms
+[2024-05-22 22:28:09.948] [micropagosdatabase] [middleware] [info] [0d309086194a] New petition received
+[2024-05-22 22:28:09.949] [micropagosdatabase] [handler] [info] [0d309086194a] starting to insert message
+[2024-05-22 22:28:10.372] [micropagosdatabase] [database] [info] [0d309086194a] Inserting the message into the database took: 423.3627ms
+[2024-05-22 22:28:10.372] [micropagosdatabase] [database] [info] [0d309086194a] Message inserted successfully. The message was saved with the id 19719207 
+[2024-05-22 22:28:10.372] [micropagosdatabase] [middleware] [info] [0d309086194a] Request took 423.9083ms

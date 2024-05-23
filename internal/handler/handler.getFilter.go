@@ -13,13 +13,15 @@ import (
 
 func (handler *Handler) IsFilter(c *gin.Context) {
 
+	ctx := c.Request.Context()
+	ctx = ins_log.SetPackageNameInContext(ctx, "handler")
+
 	//creamos la structura donde vamos a guardar la info
 	request := request.IsFiler{
-		Utfi:        c.Param("utfi"),
 		ShortNumber: c.Param("shortNumber"),
 		Mobile:      c.Param("mobile"),
 	}
-	ins_log.SetUtfi(request.Utfi)
+
 	ins_log.Infof(ctx, "starting to check if the shortnumber %s with the mobile %s are filter", request.ShortNumber, request.Mobile)
 
 	//getting the pool conection to filter
@@ -28,7 +30,7 @@ func (handler *Handler) IsFilter(c *gin.Context) {
 	serviceFiler := models.NewFilterService(storageFilter)
 
 	//REALISAMOS LA CONSULTA
-	filterResponse, err := serviceFiler.IsFilter(request)
+	filterResponse, err := serviceFiler.IsFilter(request, ctx)
 	if err != nil {
 		ins_log.Errorf(ctx, "error getting filter response")
 		response := responses.NewResponseMessage(1, err.Error(), 0)
