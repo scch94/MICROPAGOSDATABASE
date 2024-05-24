@@ -24,20 +24,20 @@ const (
 
 func (p *MysqlDomain) GetUserDomain(r request.GetUserDomain, ctx context.Context) (*models.DomainModel, error) {
 
-	//traemos el contexto y le setiamos el contexto actual
+	// Establece el contexto actual
 	ctx = ins_log.SetPackageNameInContext(ctx, "database")
 
-	//creamos la variable que guardara el dominio del usuario
+	// Crear el modelo de dominio para almacenar los resultados
 	var domainModel models.DomainModel
 
+	// Registro del inicio de la operación
 	ins_log.Tracef(ctx, "starting to get the domain for the user :%s", r.UserName)
-
-	//creamos variable que Captura el tiempo de inicio de la operación
 	startTime := time.Now()
 
 	//realizamos la consula
 	ins_log.Tracef(ctx, "this is the QUERY: %s and the params: Username=%s,", mySQLGetDomain, r.UserName)
 	err := p.db.QueryRow(mySQLGetDomain, r.UserName).Scan(&domainModel.Domainname, &domainModel.Username, &domainModel.Password)
+
 	switch {
 	case err == sql.ErrNoRows:
 		ins_log.Infof(ctx, "didnt find domain for the user %s", r.UserName)

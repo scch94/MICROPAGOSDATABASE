@@ -7,7 +7,7 @@ import (
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/lib/pq"
+
 	"github.com/scch94/MICROPAGOSDATABASE.git/config"
 	"github.com/scch94/MICROPAGOSDATABASE.git/internal/models"
 	"github.com/scch94/ins_log"
@@ -25,13 +25,8 @@ var (
 
 type Driver string
 
-// //lint:ignore SA1029 "Using built-in type string as key for context value intentionally"
-// var ctx = context.WithValue(context.Background(), "packageName", "database")
-
-// drivers
 const (
 	MySQL      Driver = "MYSQL"
-	Postgres   Driver = "POSTGRES"
 	MySQLUsers Driver = "MYSQL_USERS"
 )
 
@@ -40,8 +35,6 @@ func New(d Driver, ctx context.Context) {
 	//traemos el contexto y le setiamos el contexto actual
 	ctx = ins_log.SetPackageNameInContext(ctx, "database")
 	switch d {
-	// case Postgres:
-	// 	newPostgresDb()
 	case MySQL:
 		newMySQLDB(ctx)
 	case MySQLUsers:
@@ -95,9 +88,9 @@ func newMySQLDB(ctx context.Context) {
 		}
 		ins_log.Info(ctx, "conected to the mysql message database")
 
-		dbUsers.SetMaxOpenConns(config.Config.MySQLConnection.Raven.MaxOpenConns)
-		dbUsers.SetMaxIdleConns(config.Config.MySQLConnection.Raven.MaxIdleConns)
-		dbUsers.SetConnMaxLifetime(time.Duration(config.Config.MySQLConnection.Raven.ConnMaxLifeTime) * time.Millisecond)
+		// dbMessage.SetMaxOpenConns(config.Config.MySQLConnection.Raven.MaxOpenConns)
+		// dbMessage.SetMaxIdleConns(config.Config.MySQLConnection.Raven.MaxIdleConns)
+		// dbMessage.SetConnMaxLifetime(time.Duration(config.Config.MySQLConnection.Raven.ConnMaxLifeTime) * time.Millisecond)
 	})
 }
 func newMySQLDbUser(ctx context.Context) {
@@ -112,13 +105,13 @@ func newMySQLDbUser(ctx context.Context) {
 		if err = dbUsers.Ping(); err != nil {
 			ins_log.Fatalf(ctx, "cant do ping to the database error :%s", err)
 		}
+		ins_log.Info(ctx, "conected to the mysql users database")
 
 		///setiamos los valores de config
-		dbUsers.SetMaxOpenConns(config.Config.MySQLConnection.Weaver.MaxOpenConns)
-		dbUsers.SetMaxIdleConns(config.Config.MySQLConnection.Weaver.MaxIdleConns)
-		dbUsers.SetConnMaxLifetime(time.Duration(config.Config.MySQLConnection.Weaver.ConnMaxLifeTime) * time.Millisecond)
+		// dbUsers.SetMaxOpenConns(config.Config.MySQLConnection.Weaver.MaxOpenConns)
+		// dbUsers.SetMaxIdleConns(config.Config.MySQLConnection.Weaver.MaxIdleConns)
+		// dbUsers.SetConnMaxLifetime(time.Duration(config.Config.MySQLConnection.Weaver.ConnMaxLifeTime) * time.Millisecond)
 
-		ins_log.Info(ctx, "conected to the mysql users database")
 	})
 }
 
