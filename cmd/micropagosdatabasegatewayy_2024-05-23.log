@@ -1,0 +1,102 @@
+[2024-05-23 10:27:33.414] [not_specified] [config] [info] [] starting to get the config struct 
+[2024-05-23 10:27:33.414] [Gconfiguration] [] [info] [] starting gconfiguration Versión:%!(EXTRA string=1.0.0)
+[2024-05-23 10:27:33.414] [Gconfiguration] [] [info] [] ubication of the configurationfile C:\golang\proyectos\micropagosdatabase\cmd\configuration\config.json
+[2024-05-23 10:27:33.418] [Gconfiguration] [] [info] [] ending to get the configuration
+[2024-05-23 10:27:33.418] [Gconfiguration] [] [trace] [] this is the data that we have in the configuration {"serverPort":":2121","log_level":"info","mysqlConnection":{"raven":{"connectionString":"raven:root@tcp(127.0.0.1:1010)/raven","maxOpenConns":50,"maxIdleConns":20,"conMaxLifeTime":30000},"weaver":{"connectionString":"weaver:root@tcp(127.0.0.1:1010)/weaver","maxOpenConns":50,"maxIdleConns":20,"conMaxLifeTime":30000}},"myPostgresConnection":{"raven":{"connectionString":"","maxOpenConns":0,"maxIdleConns":0,"conMaxLifeTime":0},"weaver":{"connectionString":"","maxOpenConns":0,"maxIdleConns":0,"conMaxLifeTime":0}}}
+[2024-05-23 10:27:33.419] [micropagosdatabase] [main] [info] [] startig micropagos database module version : 1.0.0
+[2024-05-23 10:27:43.928] [micropagosdatabase] [database] [fatal] [] cant do ping to the database error :Error 1045 (28000): Access denied for user 'weaver'@'192.168.27.61' (using password: YES)
+[2024-05-23 10:27:43.928] [micropagosdatabase] [database] [info] [] conected to the mysql users database
+[2024-05-23 10:27:54.362] [micropagosdatabase] [database] [fatal] [] cant do ping to the database error :Error 1045 (28000): Access denied for user 'raven'@'192.168.27.61' (using password: YES)
+[2024-05-23 10:27:54.362] [micropagosdatabase] [database] [info] [] conected to the mysql message database
+[2024-05-23 10:27:54.362] [micropagosdatabase] [server] [info] [] Starting server on address: :2121
+[2024-05-23 10:28:06.164] [not_specified] [config] [info] [] starting to get the config struct 
+[2024-05-23 10:28:06.164] [Gconfiguration] [] [info] [] starting gconfiguration Versión:%!(EXTRA string=1.0.0)
+[2024-05-23 10:28:06.164] [Gconfiguration] [] [info] [] ubication of the configurationfile C:\golang\proyectos\micropagosdatabase\cmd\configuration\config.json
+[2024-05-23 10:28:06.165] [Gconfiguration] [] [info] [] ending to get the configuration
+[2024-05-23 10:28:06.165] [Gconfiguration] [] [trace] [] this is the data that we have in the configuration {"serverPort":":2121","log_level":"info","mysqlConnection":{"raven":{"connectionString":":root@tcp(127.0.0.1:1010)/raven","maxOpenConns":50,"maxIdleConns":20,"conMaxLifeTime":30000},"weaver":{"connectionString":"root:root@tcp(127.0.0.1:1010)/weaver","maxOpenConns":50,"maxIdleConns":20,"conMaxLifeTime":30000}},"myPostgresConnection":{"raven":{"connectionString":"","maxOpenConns":0,"maxIdleConns":0,"conMaxLifeTime":0},"weaver":{"connectionString":"","maxOpenConns":0,"maxIdleConns":0,"conMaxLifeTime":0}}}
+[2024-05-23 10:28:06.166] [micropagosdatabase] [main] [info] [] startig micropagos database module version : 1.0.0
+[2024-05-23 10:28:16.817] [micropagosdatabase] [database] [info] [] conected to the mysql users database
+[2024-05-23 10:28:27.254] [micropagosdatabase] [database] [fatal] [] cant do ping to the database error :Error 1045 (28000): Access denied for user ''@'192.168.27.61' (using password: YES)
+[2024-05-23 10:28:27.255] [micropagosdatabase] [database] [info] [] conected to the mysql message database
+[2024-05-23 10:28:27.255] [micropagosdatabase] [server] [info] [] Starting server on address: :2121
+[2024-05-23 17:16:05.063] [not_specified] [config] [info] [] starting to get the config struct 
+[2024-05-23 17:16:05.064] [Gconfiguration] [] [info] [] starting gconfiguration Versión:%!(EXTRA string=1.0.0)
+[2024-05-23 17:16:05.064] [Gconfiguration] [] [info] [] ubication of the configurationfile C:\golang\proyectos\micropagosdatabase\cmd\configuration\config.json
+[2024-05-23 17:16:05.068] [Gconfiguration] [] [info] [] ending to get the configuration
+[2024-05-23 17:16:05.068] [Gconfiguration] [] [trace] [] this is the data that we have in the configuration {"serverPort":":2121","log_level":"info","mysqlConnection":{"raven":{"connectionString":"root:root@tcp(127.0.0.1:1010)/raven","maxOpenConns":50,"maxIdleConns":20,"conMaxLifeTime":30000},"weaver":{"connectionString":"root:root@tcp(127.0.0.1:1010)/weaver","maxOpenConns":50,"maxIdleConns":20,"conMaxLifeTime":30000}},"myPostgresConnection":{"raven":{"connectionString":"","maxOpenConns":0,"maxIdleConns":0,"conMaxLifeTime":0},"weaver":{"connectionString":"","maxOpenConns":0,"maxIdleConns":0,"conMaxLifeTime":0}}}
+[2024-05-23 17:16:05.069] [micropagosdatabase] [main] [info] [] startig micropagos database module version : 1.0.0
+[2024-05-23 17:16:15.785] [micropagosdatabase] [database] [info] [] conected to the mysql users database
+[2024-05-23 17:16:26.427] [micropagosdatabase] [database] [info] [] conected to the mysql message database
+[2024-05-23 17:16:26.427] [micropagosdatabase] [server] [info] [] Starting server on address: :2121
+[2024-05-23 17:16:26.429] [micropagosdatabase] [server] [error] [] cant connect to the server: listen tcp :2121: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+[2024-05-23 17:16:26.467] [micropagosdatabase] [main] [error] [] error al tratarde iniciar el servidor : listen tcp :2121: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+[2024-05-23 17:16:34.092] [micropagosdatabase] [middleware] [info] [1111] New petition received
+[2024-05-23 17:16:34.093] [micropagosdatabase] [handler] [info] [1111] starting to get the domain for the user eaguerre
+[2024-05-23 17:16:44.957] [micropagosdatabase] [database] [info] [1111] the query in the database tooks: 10.8628357s
+[2024-05-23 17:16:44.961] [micropagosdatabase] [database] [info] [1111] and this is the domain: Micropagos
+[2024-05-23 17:16:44.962] [micropagosdatabase] [middleware] [info] [1111] Request took 10.8692674s
+[2024-05-23 17:17:38.626] [not_specified] [config] [info] [] starting to get the config struct 
+[2024-05-23 17:17:38.626] [Gconfiguration] [] [info] [] starting gconfiguration Versión:%!(EXTRA string=1.0.0)
+[2024-05-23 17:17:38.627] [Gconfiguration] [] [info] [] ubication of the configurationfile C:\golang\proyectos\micropagosdatabase\cmd\configuration\config.json
+[2024-05-23 17:17:38.630] [Gconfiguration] [] [info] [] ending to get the configuration
+[2024-05-23 17:17:38.630] [Gconfiguration] [] [trace] [] this is the data that we have in the configuration {"serverPort":":2122","log_level":"info","mysqlConnection":{"raven":{"connectionString":"root:root@tcp(127.0.0.1:1010)/raven","maxOpenConns":50,"maxIdleConns":20,"conMaxLifeTime":30000},"weaver":{"connectionString":"root:root@tcp(127.0.0.1:1010)/weaver","maxOpenConns":50,"maxIdleConns":20,"conMaxLifeTime":30000}},"myPostgresConnection":{"raven":{"connectionString":"","maxOpenConns":0,"maxIdleConns":0,"conMaxLifeTime":0},"weaver":{"connectionString":"","maxOpenConns":0,"maxIdleConns":0,"conMaxLifeTime":0}}}
+[2024-05-23 17:17:38.631] [micropagosdatabase] [main] [info] [] startig micropagos database module version : 1.0.0
+[2024-05-23 17:17:49.272] [micropagosdatabase] [database] [info] [] conected to the mysql users database
+[2024-05-23 17:17:59.896] [micropagosdatabase] [database] [info] [] conected to the mysql message database
+[2024-05-23 17:17:59.896] [micropagosdatabase] [server] [info] [] Starting server on address: :2122
+[2024-05-23 17:18:06.679] [micropagosdatabase] [middleware] [info] [1111] New petition received
+[2024-05-23 17:18:06.680] [micropagosdatabase] [handler] [info] [1111] starting to get the domain for the user eaguerre
+[2024-05-23 17:18:07.102] [micropagosdatabase] [database] [info] [1111] the query in the database tooks: 421.9604ms
+[2024-05-23 17:18:07.102] [micropagosdatabase] [database] [info] [1111] and this is the domain: Micropagos
+[2024-05-23 17:18:07.102] [micropagosdatabase] [middleware] [info] [1111] Request took 422.4704ms
+[2024-05-23 17:20:18.509] [micropagosdatabase] [middleware] [info] [ed9ba844ce6c] New petition received
+[2024-05-23 17:20:18.511] [micropagosdatabase] [handler] [info] [ed9ba844ce6c] starting to get the domain for the user eaguerre
+[2024-05-23 17:20:29.372] [micropagosdatabase] [database] [info] [ed9ba844ce6c] the query in the database tooks: 10.8613196s
+[2024-05-23 17:20:29.373] [micropagosdatabase] [database] [info] [ed9ba844ce6c] and this is the domain: Micropagos
+[2024-05-23 17:20:29.373] [micropagosdatabase] [middleware] [info] [ed9ba844ce6c] Request took 10.8634225s
+[2024-05-23 17:21:10.430] [micropagosdatabase] [middleware] [info] [ab5fb4b17efa] New petition received
+[2024-05-23 17:21:10.431] [micropagosdatabase] [handler] [info] [ab5fb4b17efa] starting to get the domain for the user eaguerre
+[2024-05-23 17:21:21.305] [micropagosdatabase] [database] [info] [ab5fb4b17efa] the query in the database tooks: 10.8727736s
+[2024-05-23 17:21:21.305] [micropagosdatabase] [database] [info] [ab5fb4b17efa] and this is the domain: Micropagos
+[2024-05-23 17:21:21.305] [micropagosdatabase] [middleware] [info] [ab5fb4b17efa] Request took 10.8750568s
+[2024-05-23 17:22:02.635] [micropagosdatabase] [middleware] [info] [13ec699dec94] New petition received
+[2024-05-23 17:22:02.636] [micropagosdatabase] [handler] [info] [13ec699dec94] starting to get the domain for the user eaguerre
+[2024-05-23 17:22:13.500] [micropagosdatabase] [database] [info] [13ec699dec94] the query in the database tooks: 10.8635884s
+[2024-05-23 17:22:13.500] [micropagosdatabase] [database] [info] [13ec699dec94] and this is the domain: Micropagos
+[2024-05-23 17:22:13.501] [micropagosdatabase] [middleware] [info] [13ec699dec94] Request took 10.86562s
+[2024-05-23 17:22:14.094] [micropagosdatabase] [middleware] [info] [a82470cb3ff5] New petition received
+[2024-05-23 17:22:14.094] [micropagosdatabase] [handler] [info] [a82470cb3ff5] starting to check if the shortnumber 88277 with the mobile 99111111 are filter
+[2024-05-23 17:22:14.518] [micropagosdatabase] [database] [info] [a82470cb3ff5] the combination of destination and origin mobile numbers is not filter
+[2024-05-23 17:22:14.518] [micropagosdatabase] [database] [info] [a82470cb3ff5] the query in the database tooks: 424.0274ms
+[2024-05-23 17:22:14.518] [micropagosdatabase] [middleware] [info] [a82470cb3ff5] Request took 424.5466ms
+[2024-05-23 17:22:14.555] [micropagosdatabase] [middleware] [info] [a82470cb3ff5] New petition received
+[2024-05-23 17:22:14.556] [micropagosdatabase] [handler] [info] [a82470cb3ff5] starting to insert message
+[2024-05-23 17:22:14.981] [micropagosdatabase] [database] [info] [a82470cb3ff5] Inserting the message into the database took: 424.7849ms
+[2024-05-23 17:22:14.981] [micropagosdatabase] [database] [info] [a82470cb3ff5] Message inserted successfully. The message was saved with the id 19719208 
+[2024-05-23 17:22:14.981] [micropagosdatabase] [middleware] [info] [a82470cb3ff5] Request took 426.3385ms
+[2024-05-23 17:23:33.156] [micropagosdatabase] [middleware] [info] [eeb656be5ad1] New petition received
+[2024-05-23 17:23:33.156] [micropagosdatabase] [handler] [info] [eeb656be5ad1] starting to get the domain for the user eaguerre
+[2024-05-23 17:23:44.008] [micropagosdatabase] [database] [info] [eeb656be5ad1] the query in the database tooks: 10.85232s
+[2024-05-23 17:23:44.008] [micropagosdatabase] [database] [info] [eeb656be5ad1] and this is the domain: Micropagos
+[2024-05-23 17:23:44.008] [micropagosdatabase] [middleware] [info] [eeb656be5ad1] Request took 10.85232s
+[2024-05-23 17:23:44.483] [micropagosdatabase] [middleware] [info] [94362990f8d1] New petition received
+[2024-05-23 17:23:44.483] [micropagosdatabase] [handler] [info] [94362990f8d1] starting to check if the shortnumber 88277 with the mobile 99111111 are filter
+[2024-05-23 17:23:44.903] [micropagosdatabase] [database] [info] [94362990f8d1] the combination of destination and origin mobile numbers is not filter
+[2024-05-23 17:23:44.903] [micropagosdatabase] [database] [info] [94362990f8d1] the query in the database tooks: 419.2226ms
+[2024-05-23 17:23:44.903] [micropagosdatabase] [middleware] [info] [94362990f8d1] Request took 419.8283ms
+[2024-05-23 17:23:44.934] [micropagosdatabase] [middleware] [info] [94362990f8d1] New petition received
+[2024-05-23 17:23:44.934] [micropagosdatabase] [handler] [info] [94362990f8d1] starting to insert message
+[2024-05-23 17:23:45.355] [micropagosdatabase] [database] [info] [94362990f8d1] Inserting the message into the database took: 420.6507ms
+[2024-05-23 17:23:45.355] [micropagosdatabase] [database] [info] [94362990f8d1] Message inserted successfully. The message was saved with the id 19719209 
+[2024-05-23 17:23:45.355] [micropagosdatabase] [middleware] [info] [94362990f8d1] Request took 420.7084ms
+[2024-05-23 21:08:44.138] [micropagosdatabase] [middleware] [info] [842b504138c1] New petition received
+[2024-05-23 21:08:44.144] [micropagosdatabase] [handler] [info] [842b504138c1] starting handler welcome
+[2024-05-23 21:08:44.149] [micropagosdatabase] [middleware] [info] [842b504138c1] Request took 10.8053ms
+[2024-05-23 21:08:51.780] [micropagosdatabase] [middleware] [info] [d57a500d9de1] New petition received
+[2024-05-23 21:08:51.784] [micropagosdatabase] [handler] [info] [d57a500d9de1] starting to get the domain for the user eaguerre
+[2024-05-23 21:09:02.756] [micropagosdatabase] [database] [info] [d57a500d9de1] the query in the database tooks: 10.9634642s
+[2024-05-23 21:09:02.757] [micropagosdatabase] [database] [info] [d57a500d9de1] and this is the domain: Micropagos
+[2024-05-23 21:09:02.759] [micropagosdatabase] [middleware] [info] [d57a500d9de1] Request took 10.9782282s
+[2024-05-23 22:16:18.488] [micropagosdatabase] [middleware] [info] [4b4109909652] New petition received
+[2024-05-23 22:16:18.488] [micropagosdatabase] [handler] [info] [4b4109909652] starting handler welcome
+[2024-05-23 22:16:18.488] [micropagosdatabase] [middleware] [info] [4b4109909652] Request took 0s

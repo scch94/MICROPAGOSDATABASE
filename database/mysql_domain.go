@@ -19,7 +19,7 @@ func NewMysqlDomain(db *sql.DB) *MysqlDomain {
 }
 
 const (
-	mySQLGetDomain = `SELECT d.name FROM user u JOIN domain d ON u.domain_id = d.id where u.username=?`
+	mySQLGetDomain = `SELECT d.name, u.username, u.password FROM user u JOIN domain d ON u.domain_id = d.id where u.username=?`
 )
 
 func (p *MysqlDomain) GetUserDomain(r request.GetUserDomain, ctx context.Context) (*models.DomainModel, error) {
@@ -37,7 +37,7 @@ func (p *MysqlDomain) GetUserDomain(r request.GetUserDomain, ctx context.Context
 
 	//realizamos la consula
 	ins_log.Tracef(ctx, "this is the QUERY: %s and the params: Username=%s,", mySQLGetDomain, r.UserName)
-	err := p.db.QueryRow(mySQLGetDomain, r.UserName).Scan(&domainModel.Domainname)
+	err := p.db.QueryRow(mySQLGetDomain, r.UserName).Scan(&domainModel.Domainname, &domainModel.Username, &domainModel.Password)
 	switch {
 	case err == sql.ErrNoRows:
 		ins_log.Infof(ctx, "didnt find domain for the user %s", r.UserName)

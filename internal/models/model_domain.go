@@ -9,6 +9,8 @@ import (
 
 type DomainModel struct {
 	Domainname string
+	Username   string
+	Password   string
 	Result     string
 }
 

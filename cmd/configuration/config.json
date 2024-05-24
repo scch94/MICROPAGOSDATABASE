@@ -1,5 +1,5 @@
 {
-    "serverPort":":2121",
+    "serverPort":":2122",
     "log_level":"info",
 
     "mysqlConnection":{

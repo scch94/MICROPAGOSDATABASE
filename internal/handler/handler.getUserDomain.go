@@ -41,6 +41,8 @@ func (handler *Handler) GetUserDomain(c *gin.Context) {
 			Message: domainResponse.Result,
 		},
 		DomainName: domainResponse.Domainname,
+		Username:   domainResponse.Username,
+		Password:   domainResponse.Password,
 	}
 	c.JSON(http.StatusOK, response)
 
